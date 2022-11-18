@@ -8,6 +8,7 @@ import Database.gameScore;
 import Engine.GameEngine;
 import static GUI.Login.gamePlayer;
 import java.awt.image.BufferedImage;
+import static java.lang.Thread.sleep;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -16,8 +17,8 @@ import javax.swing.JOptionPane;
  * @author dlweb
  */
 public class Game extends javax.swing.JFrame {
+
     public static int score = 0;
-    
 
     gameScore addscore;
     /**
@@ -25,10 +26,55 @@ public class Game extends javax.swing.JFrame {
      */
     GameEngine mathGame = null;
     BufferedImage gameOverview = null;
+    static int milliSeconds = 0;
+    static int Seconds = 0;
+    static int minutes = 0;
+    static int hours = 0;
+
+    static boolean state = true;
 
     public Game() {
         initComponents();
         showgame(null);
+        state = true;
+
+        Thread clock = new Thread() {
+            public void run() {
+                for (;;) {
+                    if (state == true) {
+                        try {
+                            sleep(1);
+
+                            if (milliSeconds > 1000) {
+                                milliSeconds = 0;
+                                Seconds++;
+                            }
+                            if (Seconds > 60) {
+                                milliSeconds = 0;
+                                Seconds = 0;
+                                minutes++;
+                            }
+                            if (minutes > 60) {
+                                milliSeconds = 0;
+                                Seconds = 0;
+                                minutes = 0;
+                                hours++;
+                            }
+                            milliSecond.setText(" : " + milliSeconds);
+                            milliSeconds++;
+                            Second.setText(" : " + Seconds);
+                            minute.setText(" : " + minutes);
+                            hour.setText(" : " + hours);
+                        } catch (Exception e) {
+
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+        };
+        clock.start();
     }
 
     private void showgame(String gamer) {
@@ -54,6 +100,11 @@ public class Game extends javax.swing.JFrame {
         textNO = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         textLable = new javax.swing.JLabel();
+        hour = new javax.swing.JLabel();
+        minute = new javax.swing.JLabel();
+        Second = new javax.swing.JLabel();
+        milliSecond = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,10 +113,10 @@ public class Game extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 0, 24)); // NOI18N
         jLabel1.setText("Enter The Number");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 540, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 590, -1, -1));
 
         textNO.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 18)); // NOI18N
-        jPanel1.add(textNO, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 540, 70, 40));
+        jPanel1.add(textNO, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 590, 70, 40));
 
         jButton1.setBackground(new java.awt.Color(0, 51, 153));
         jButton1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 24)); // NOI18N
@@ -77,8 +128,33 @@ public class Game extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 540, 86, 35));
-        jPanel1.add(textLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 680, 400));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 590, 86, 35));
+        jPanel1.add(textLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 680, 400));
+
+        hour.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        hour.setText("00 :");
+        jPanel1.add(hour, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 50, 40));
+
+        minute.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        minute.setText("00 :");
+        jPanel1.add(minute, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 50, 40));
+
+        Second.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        Second.setText("00 :");
+        jPanel1.add(Second, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 50, 40));
+
+        milliSecond.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        milliSecond.setText("00 :");
+        milliSecond.setToolTipText("");
+        jPanel1.add(milliSecond, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 90, 70, 40));
+
+        jButton2.setText("Start");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon("E:\\3 Year\\CIS\\Project_netBeams\\RatioMaths\\src\\main\\java\\resource\\bg_xl.jpg")); // NOI18N
         jLabel3.setText("jLabel3");
@@ -114,24 +190,72 @@ public class Game extends javax.swing.JFrame {
             this.dispose();
             GameStatus push = new GameStatus();
             push.setVisible(true);
-
             ImageIcon NextImage = new ImageIcon(gameOverview);
             textLable.setIcon(NextImage);
 
-            
         } else {
             JOptionPane.showMessageDialog(this, "Incorrect Value");
+            state = false;
             addscore = new gameScore();
             addscore.addScore(gamePlayer, score);
             this.dispose();
             Score push = new Score();
-            push.setVisible(true);
-            
+
+            push.setVisible(
+                    true);
 
         }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+
+        /*state = true;
+
+        Thread clock = new Thread() {
+            public void run() {
+                for (;;) {
+                    if (state == true) {
+                        try {
+                            sleep(1);
+                            
+                            if(milliSeconds > 1000){
+                                milliSeconds = 0;
+                                Seconds++;
+                            }
+                            if(Seconds > 60){
+                                milliSeconds = 0;
+                                Seconds = 0;
+                                minutes++;
+                            }
+                            if(minutes > 60){
+                                milliSeconds = 0;
+                                Seconds = 0;
+                                minutes = 0;
+                                hours++;
+                            }
+                            milliSecond.setText(" : "+milliSeconds);
+                            milliSeconds++;
+                            Second.setText(" : "+Seconds);
+                            minute.setText(" : "+minutes);
+                            hour.setText(" : "+hours);
+                        }
+                        catch(Exception e)
+                        {
+                            
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+        };
+        clock.start();*/
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,13 +274,17 @@ public class Game extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Game.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Game.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Game.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Game.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -170,10 +298,15 @@ public class Game extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Second;
+    private javax.swing.JLabel hour;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel milliSecond;
+    private javax.swing.JLabel minute;
     private javax.swing.JLabel textLable;
     private javax.swing.JTextField textNO;
     // End of variables declaration//GEN-END:variables

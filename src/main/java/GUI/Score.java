@@ -165,7 +165,12 @@ public class Score extends javax.swing.JFrame {
         Game push = new Game();
         push.setVisible(true);
         
+        
         Game.score = 0;
+        Game.milliSeconds =0;
+        Game.Seconds = 0;
+        Game.minutes =0;
+        Game.hours =0;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
