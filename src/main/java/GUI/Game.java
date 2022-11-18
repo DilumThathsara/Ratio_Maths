@@ -60,11 +60,11 @@ public class Game extends javax.swing.JFrame {
                                 minutes = 0;
                                 hours++;
                             }
-                            milliSecond.setText(" : " + milliSeconds);
+                            milliSecond.setText(milliSeconds +"");
                             milliSeconds++;
-                            Second.setText(" : " + Seconds);
-                            minute.setText(" : " + minutes);
-                            hour.setText(" : " + hours);
+                            Second.setText(Seconds +" : ");
+                            minute.setText(+ minutes +" : ");
+                            hour.setText(+ hours +" : ");
                         } catch (Exception e) {
 
                         }
@@ -104,7 +104,6 @@ public class Game extends javax.swing.JFrame {
         minute = new javax.swing.JLabel();
         Second = new javax.swing.JLabel();
         milliSecond = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -133,28 +132,20 @@ public class Game extends javax.swing.JFrame {
 
         hour.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         hour.setText("00 :");
-        jPanel1.add(hour, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 50, 40));
+        jPanel1.add(hour, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 50, 40));
 
         minute.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         minute.setText("00 :");
-        jPanel1.add(minute, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 50, 40));
+        jPanel1.add(minute, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 50, 40));
 
         Second.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         Second.setText("00 :");
-        jPanel1.add(Second, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 50, 40));
+        jPanel1.add(Second, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 50, 40));
 
-        milliSecond.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        milliSecond.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         milliSecond.setText("00 :");
         milliSecond.setToolTipText("");
-        jPanel1.add(milliSecond, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 90, 70, 40));
-
-        jButton2.setText("Start");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
+        jPanel1.add(milliSecond, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 70, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon("E:\\3 Year\\CIS\\Project_netBeams\\RatioMaths\\src\\main\\java\\resource\\bg_xl.jpg")); // NOI18N
         jLabel3.setText("jLabel3");
@@ -201,61 +192,12 @@ public class Game extends javax.swing.JFrame {
             this.dispose();
             Score push = new Score();
 
-            push.setVisible(
-                    true);
+            push.setVisible(true);
 
         }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-
-        /*state = true;
-
-        Thread clock = new Thread() {
-            public void run() {
-                for (;;) {
-                    if (state == true) {
-                        try {
-                            sleep(1);
-                            
-                            if(milliSeconds > 1000){
-                                milliSeconds = 0;
-                                Seconds++;
-                            }
-                            if(Seconds > 60){
-                                milliSeconds = 0;
-                                Seconds = 0;
-                                minutes++;
-                            }
-                            if(minutes > 60){
-                                milliSeconds = 0;
-                                Seconds = 0;
-                                minutes = 0;
-                                hours++;
-                            }
-                            milliSecond.setText(" : "+milliSeconds);
-                            milliSeconds++;
-                            Second.setText(" : "+Seconds);
-                            minute.setText(" : "+minutes);
-                            hour.setText(" : "+hours);
-                        }
-                        catch(Exception e)
-                        {
-                            
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-        };
-        clock.start();*/
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,7 +243,6 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JLabel Second;
     private javax.swing.JLabel hour;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
